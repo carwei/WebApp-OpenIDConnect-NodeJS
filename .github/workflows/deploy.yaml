@@ -1,0 +1,30 @@
+name: Deploy Sample
+on:
+  # Trigger the workflow on push, but only for the master branch
+  push:
+    branches:
+      - master
+jobs:
+  app_engine_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.3
+
+      # https://github.com/marketplace/actions/publish-app-to-google-app-engine
+      - name: Initialize Google Cloud SDK
+        uses: zxyle/publish-gae-action@master
+        with:
+          service_account_email: ${{ secrets.SERVICE_ACCOUNT_EMAIL_GT1 }}
+          service_account_key: ${{ secrets.SERVICE_ACCOUNT_GT1 }}
+          project_id: ${{ secrets.PROJECT_ID_GT1 }}
+          # An optional variables parameter can be used
+          #gae_variables: ${{ secrets.GAE_VARIABLES1 }}
+          gae_config_path: './app_gt.yaml'
+
+      - name: Publish app to Google App Engine
+        run: |
+          # This client-secret.json is converted by GCP_SA_KEY.
+          gcloud auth activate-service-account ${{ secrets.SERVICE_ACCOUNT_EMAIL_GT1 }} --key-file=client-secret.json
+          gcloud config set project ${{ secrets.PROJECT_ID_GT1 }}
+          gcloud -q app deploy app_gt.yaml --promote
