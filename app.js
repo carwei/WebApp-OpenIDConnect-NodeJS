@@ -75,7 +75,7 @@ var users = [];
 var findByOid = function(oid, fn) {
   for (var i = 0, len = users.length; i < len; i++) {
     var user = users[i];
-   log.info('we are using user: ', user);
+   console.log('we are using user: ', user);
     if (user.oid === oid) {
       return fn(null, user);
     }
@@ -214,7 +214,7 @@ app.get('/login',
     )(req, res, next);
   },
   function(req, res) {
-    log.info('Login was called in the Sample');
+    console.log('Login was called in the Sample');
     res.redirect('/');
 });
 
@@ -232,7 +232,7 @@ app.get('/auth/openid/return',
     )(req, res, next);
   },
   function(req, res) {
-    log.info('We received a return from AzureAD.');
+    console.log('We received a return from AzureAD.');
     res.redirect('/');
   });
 
@@ -250,7 +250,7 @@ app.post('/auth/openid/return',
     )(req, res, next);
   },
   function(req, res) {
-    log.info('We received a return from AzureAD.');
+    console.log('We received a return from AzureAD.');
     res.redirect('/');
   });
 
