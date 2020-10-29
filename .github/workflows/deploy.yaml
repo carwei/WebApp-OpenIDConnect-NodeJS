@@ -27,4 +27,4 @@ jobs:
           # This client-secret.json is converted by GCP_SA_KEY.
           gcloud auth activate-service-account ${{ secrets.SERVICE_ACCOUNT_EMAIL }} --key-file=client-secret.json
           gcloud config set project ${{ secrets.PROJECT_ID }}
-          gcloud -q app deploy app_gt.yaml --promote
+          gcloud -q app deploy app.yaml --promote
