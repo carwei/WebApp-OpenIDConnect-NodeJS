@@ -20,7 +20,7 @@ jobs:
           project_id: ${{ secrets.PROJECT_ID_GT1 }}
           # An optional variables parameter can be used
           #gae_variables: ${{ secrets.GAE_VARIABLES1 }}
-          gae_config_path: './app_gt.yaml'
+          gae_config_path: './app.yaml'
 
       - name: Publish app to Google App Engine
         run: |
